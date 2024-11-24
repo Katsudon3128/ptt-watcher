@@ -66,7 +66,7 @@ var chart = new Chart(ctx, {
         display: true,
         position: 'left',
         ticks: {
-          stepSize: 100,
+          stepSize: 1000,
           color: 'white'
         },
         grid:{
@@ -203,7 +203,7 @@ var updateData = function(){
               },
               backgroundColor: function(value, context){
                 if (value.dataIndex == value.dataset.data.length - 1){
-                  return 'rgba(255, 0, 0, 0.1)';
+                  return 'rgba(255, 204, 204, 0.1)';
                 }
                 return "";
               },
@@ -264,7 +264,7 @@ var updateData = function(){
               },
               backgroundColor: function(value, context){
                 if (value.dataIndex == value.dataset.data.length - 1){
-                  return 'rgba(255, 26, 26, 0.1)';
+                  return 'rgba(255, 204, 204, 0.1)';
                 }
                 return "";
               },
@@ -325,7 +325,7 @@ var updateData = function(){
               },
               backgroundColor: function(value, context){
                 if (value.dataIndex == value.dataset.data.length - 1){
-                  return 'rgba(255, 51, 51, 0.1)';
+                  return 'rgba(255, 204, 204, 0.1)';
                 }
                 return "";
               },
@@ -386,7 +386,7 @@ var updateData = function(){
               },
               backgroundColor: function(value, context){
                 if (value.dataIndex == value.dataset.data.length - 1){
-                  return 'rgba(255, 77, 77, 0.1)';
+                  return 'rgba(255, 204, 204, 0.1)';
                 }
                 return "";
               },
@@ -447,7 +447,7 @@ var updateData = function(){
               },
               backgroundColor: function(value, context){
                 if (value.dataIndex == value.dataset.data.length - 1){
-                  return 'rgba(255, 102, 102, 0.1)';
+                  return 'rgba(255, 204, 204, 0.1)';
                 }
                 return "";
               },
@@ -508,7 +508,7 @@ var updateData = function(){
               },
               backgroundColor: function(value, context){
                 if (value.dataIndex == value.dataset.data.length - 1){
-                  return 'rgba(255, 128, 128, 0.1)';
+                  return 'rgba(255, 204, 204, 0.1)';
                 }
                 return "";
               },
@@ -569,7 +569,7 @@ var updateData = function(){
               },
               backgroundColor: function(value, context){
                 if (value.dataIndex == value.dataset.data.length - 1){
-                  return 'rgba(255, 153, 153, 0.1)';
+                  return 'rgba(255, 204, 204, 0.1)';
                 }
                 return "";
               },
@@ -630,7 +630,7 @@ var updateData = function(){
               },
               backgroundColor: function(value, context){
                 if (value.dataIndex == value.dataset.data.length - 1){
-                  return 'rgba(255, 179, 179, 0.1)';
+                  return 'rgba(255, 204, 204, 0.1)';
                 }
                 return "";
               },
