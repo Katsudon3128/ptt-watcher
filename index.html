@@ -1,17 +1,21 @@
 <html>
     <head>
+        <meta charset="utf-8">
         <title>ptt watcher</title>
         <script src="jquery/jquery-3.7.1.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+        <script src="https://cdn.jsdelivr.net/npm/moment@^2"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@^1"></script>
         <script src="jquery/jquery.csv.js"></script>
     </head>
-    <body>
-        <div style="width:1500px">
+    <body onload="setTime()" style="background-color:rgb(51, 51, 51)">
+        <div style="width:1500px;background-color:rgb(0, 0, 0)">
             <canvas id="chart"></canvas>
         </div>
+        <span id="current" style="color: white;"></span>
         <br>
         <button onclick="Stop()">Stop</button>
-        <script type="text/javascript" src="script/main.js"></script>        
+        <script type="text/javascript" src="script/main.js"></script>
     </body>
 </html>

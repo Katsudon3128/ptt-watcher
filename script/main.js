@@ -23,42 +23,92 @@ var chart = new Chart(ctx, {
   },
   plugins: [ChartDataLabels],
   options:{
-    layout: {
-        padding: {
-            left: 10,
-            right: 200,
-            top: 10,
-            bottom: 10
-        }
-    },
+    borderWidth: 2,
     plugins:{
-      datalabels:{
-        display: 'true',
-        anchor: 'end',
-        align: 'top',
-        borderRadius: 4,
-        padding: 6,
-        font: {
-          weight: 'bold'
-        },
-        color: 'black',
-        formatter: function(value, context){
-          if (context.dataIndex == context.dataset.data.length - 1){
-            return context.dataset.label + '\n' + value;
-          }
-          return "";
+      legend:{
+        labels:{
+          color: 'white'
         }
       }
     },
+    layout: {
+        padding: {
+            left: 20,
+            right: 200,
+            top: 20,
+            bottom: 20
+        }
+    },
     responsive: true,
-    animation:false,
+    animation: false,
     scales:{
+      x:{
+        type: 'time',
+        time:{
+          unit: 'minute',
+          displayFormats:{
+            minute: 'HH:mm'
+          }
+        },
+        ticks:{
+          color: 'white'
+        },
+        grid:{
+          color: 'rgb(26, 26, 26)'
+        },
+        border:{
+          display: true,
+          color: 'rgb(26, 26, 26)'
+        }
+      },
       y1:{
         type: 'linear',
         display: true,
         position: 'left',
         ticks: {
-          stepSize: 100
+          stepSize: 100,
+          color: 'white'
+        },
+        grid:{
+          color: function(context){
+            if (context.tick.value>=100000){
+              return 'rgb(75, 0, 102)';
+            }
+            else if(context.tick.value>=60000){
+              return 'rgb(102, 102, 0)';
+            }
+            else if(context.tick.value>=30000){
+              return 'rgb(17, 102, 0)';
+            }
+            else if(context.tick.value>=10000){
+              return 'rgb(0, 102, 102)';
+            }
+            else if(context.tick.value>=5000){
+              return 'rgb(0, 9, 102)';
+            }
+            else if(context.tick.value>=2000){
+              return 'rgb(102, 17, 0)';
+            }
+            return 'rgb(51, 51, 51)';
+          }
+        },
+        border:{
+          display: true,
+          color: 'rgb(26, 26, 26)'
+        }
+      },
+      y2:{
+        display: true,
+        position: 'right',
+        border:{
+          display: true,
+          color: 'rgb(26, 26, 26)'
+        },
+        grid:{
+          color: 'rgb(0, 0, 0)'
+        },
+        ticks:{
+          color: 'rgb(0, 0, 0)'
         }
       }
     }
@@ -113,106 +163,606 @@ var updateData = function(){
             yAxisID: 'y1',
             pointBorderWidth: 5,
             pointHitRadius: 20,
-            pointStyle: false
+            pointStyle: false,
+            datalabels:{
+              display: true,
+              anchor: 'end',
+              clamp: 'true',
+              align: '-45',
+              offset: 1,
+              borderRadius: 4,
+              padding: 6,
+              font: {
+                weight: 'bold',
+                size: 18
+              },
+              color: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  var users = parseInt(value.dataset.data[value.dataIndex]);
+                  if(users>=100000){
+                    return 'rgb(214, 102, 255)';
+                  }
+                  else if(users>=60000){
+                    return 'rgb(255, 255, 102)';
+                  }
+                  else if(users>=30000){
+                    return 'rgb(102, 255, 72)';
+                  }
+                  else if(users>=10000){
+                    return 'rgb(72, 255, 255)';
+                  }
+                  else if(users>=5000){
+                    return 'rgb(89, 102, 255)';
+                  }
+                  else if(users>=2000){
+                    return 'rgb(255, 71, 36)';
+                  }
+                  return 'white';
+                }
+                return "";
+              },
+              backgroundColor: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  return 'rgba(255, 0, 0, 0.1)';
+                }
+                return "";
+              },
+              formatter: function(value, context){
+                if (context.dataIndex == context.dataset.data.length - 1){
+                  return context.dataset.label + ' 人氣 ' + value;
+                }
+                return "";
+              }
+            }
           },
           {
             label: csvData[0][2],
             data: b2,
             fill: false,
-            borderColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(255, 26, 26)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
             pointHitRadius: 20,
-            pointStyle: false
+            pointStyle: false,
+            datalabels:{
+              display: true,
+              anchor: 'end',
+              clamp: 'true',
+              align: '-45',
+              offset: 1,
+              borderRadius: 4,
+              padding: 6,
+              font: {
+                weight: 'bold',
+                size: 17
+              },
+              color: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  var users = parseInt(value.dataset.data[value.dataIndex]);
+                  if(users>=100000){
+                    return 'rgb(214, 102, 255)';
+                  }
+                  else if(users>=60000){
+                    return 'rgb(255, 255, 102)';
+                  }
+                  else if(users>=30000){
+                    return 'rgb(102, 255, 72)';
+                  }
+                  else if(users>=10000){
+                    return 'rgb(72, 255, 255)';
+                  }
+                  else if(users>=5000){
+                    return 'rgb(89, 102, 255)';
+                  }
+                  else if(users>=2000){
+                    return 'rgb(255, 71, 36)';
+                  }
+                  return 'white';
+                }
+                return "";
+              },
+              backgroundColor: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  return 'rgba(255, 26, 26, 0.1)';
+                }
+                return "";
+              },
+              formatter: function(value, context){
+                if (context.dataIndex == context.dataset.data.length - 1){
+                  return context.dataset.label + ' 人氣 ' + value;
+                }
+                return "";
+              }
+            }
           },
           {
             label: csvData[0][3],
             data: b3,
             fill: false,
-            borderColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(255, 51, 51)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
             pointHitRadius: 20,
-            pointStyle: false
+            pointStyle: false,
+            datalabels:{
+              display: true,
+              anchor: 'end',
+              clamp: 'true',
+              align: '-45',
+              offset: 1,
+              borderRadius: 4,
+              padding: 6,
+              font: {
+                weight: 'bold',
+                size: 16
+              },
+              color: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  var users = parseInt(value.dataset.data[value.dataIndex]);
+                  if(users>=100000){
+                    return 'rgb(214, 102, 255)';
+                  }
+                  else if(users>=60000){
+                    return 'rgb(255, 255, 102)';
+                  }
+                  else if(users>=30000){
+                    return 'rgb(102, 255, 72)';
+                  }
+                  else if(users>=10000){
+                    return 'rgb(72, 255, 255)';
+                  }
+                  else if(users>=5000){
+                    return 'rgb(89, 102, 255)';
+                  }
+                  else if(users>=2000){
+                    return 'rgb(255, 71, 36)';
+                  }
+                  return 'white';
+                }
+                return "";
+              },
+              backgroundColor: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  return 'rgba(255, 51, 51, 0.1)';
+                }
+                return "";
+              },
+              formatter: function(value, context){
+                if (context.dataIndex == context.dataset.data.length - 1){
+                  return context.dataset.label + ' 人氣 ' + value;
+                }
+                return "";
+              }
+            }
           },
           {
             label: csvData[0][4],
             data: b4,
             fill: false,
-            borderColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(255, 77, 77)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
             pointHitRadius: 20,
-            pointStyle: false
+            pointStyle: false,
+            datalabels:{
+              display: true,
+              anchor: 'end',
+              clamp: 'true',
+              align: '-40',
+              offset: 5,
+              borderRadius: 4,
+              padding: 6,
+              font: {
+                weight: 'bold',
+                size: 15
+              },
+              color: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  var users = parseInt(value.dataset.data[value.dataIndex]);
+                  if(users>=100000){
+                    return 'rgb(214, 102, 255)';
+                  }
+                  else if(users>=60000){
+                    return 'rgb(255, 255, 102)';
+                  }
+                  else if(users>=30000){
+                    return 'rgb(102, 255, 72)';
+                  }
+                  else if(users>=10000){
+                    return 'rgb(72, 255, 255)';
+                  }
+                  else if(users>=5000){
+                    return 'rgb(89, 102, 255)';
+                  }
+                  else if(users>=2000){
+                    return 'rgb(255, 71, 36)';
+                  }
+                  return 'white';
+                }
+                return "";
+              },
+              backgroundColor: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  return 'rgba(255, 77, 77, 0.1)';
+                }
+                return "";
+              },
+              formatter: function(value, context){
+                if (context.dataIndex == context.dataset.data.length - 1){
+                  return context.dataset.label + ' 人氣 ' + value;
+                }
+                return "";
+              }
+            }
           },
           {
             label: csvData[0][5],
             data: b5,
             fill: false,
-            borderColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(255, 102, 102)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
             pointHitRadius: 20,
-            pointStyle: false
+            pointStyle: false,
+            datalabels:{
+              display: true,
+              anchor: 'end',
+              clamp: 'true',
+              align: '-40',
+              offset: 1,
+              borderRadius: 4,
+              padding: 6,
+              font: {
+                weight: 'bold',
+                size: 14
+              },
+              color: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  var users = parseInt(value.dataset.data[value.dataIndex]);
+                  if(users>=100000){
+                    return 'rgb(214, 102, 255)';
+                  }
+                  else if(users>=60000){
+                    return 'rgb(255, 255, 102)';
+                  }
+                  else if(users>=30000){
+                    return 'rgb(102, 255, 72)';
+                  }
+                  else if(users>=10000){
+                    return 'rgb(72, 255, 255)';
+                  }
+                  else if(users>=5000){
+                    return 'rgb(89, 102, 255)';
+                  }
+                  else if(users>=2000){
+                    return 'rgb(255, 71, 36)';
+                  }
+                  return 'white';
+                }
+                return "";
+              },
+              backgroundColor: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  return 'rgba(255, 102, 102, 0.1)';
+                }
+                return "";
+              },
+              formatter: function(value, context){
+                if (context.dataIndex == context.dataset.data.length - 1){
+                  return context.dataset.label + ' 人氣 ' + value;
+                }
+                return "";
+              }
+            }
           },
           {
             label: csvData[0][6],
             data: b6,
             fill: false,
-            borderColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(255, 128, 128)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
             pointHitRadius: 20,
-            pointStyle: false
+            pointStyle: false,
+            datalabels:{
+              display: true,
+              anchor: 'end',
+              clamp: 'true',
+              align: '-20',
+              offset: 0,
+              borderRadius: 4,
+              padding: 6,
+              font: {
+                weight: 'bold',
+                size: 13
+              },
+              color: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  var users = parseInt(value.dataset.data[value.dataIndex]);
+                  if(users>=100000){
+                    return 'rgb(214, 102, 255)';
+                  }
+                  else if(users>=60000){
+                    return 'rgb(255, 255, 102)';
+                  }
+                  else if(users>=30000){
+                    return 'rgb(102, 255, 72)';
+                  }
+                  else if(users>=10000){
+                    return 'rgb(72, 255, 255)';
+                  }
+                  else if(users>=5000){
+                    return 'rgb(89, 102, 255)';
+                  }
+                  else if(users>=2000){
+                    return 'rgb(255, 71, 36)';
+                  }
+                  return 'white';
+                }
+                return "";
+              },
+              backgroundColor: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  return 'rgba(255, 128, 128, 0.1)';
+                }
+                return "";
+              },
+              formatter: function(value, context){
+                if (context.dataIndex == context.dataset.data.length - 1){
+                  return context.dataset.label + ' 人氣 ' + value;
+                }
+                return "";
+              }
+            }
           },
           {
             label: csvData[0][7],
             data: b7,
             fill: false,
-            borderColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(255, 153, 153)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
             pointHitRadius: 20,
-            pointStyle: false
+            pointStyle: false,
+            datalabels:{
+              display: true,
+              anchor: 'end',
+              clamp: 'true',
+              align: '0',
+              offset: 0,
+              borderRadius: 4,
+              padding: 6,
+              font: {
+                weight: 'bold',
+                size: 12
+              },
+              color: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  var users = parseInt(value.dataset.data[value.dataIndex]);
+                  if(users>=100000){
+                    return 'rgb(214, 102, 255)';
+                  }
+                  else if(users>=60000){
+                    return 'rgb(255, 255, 102)';
+                  }
+                  else if(users>=30000){
+                    return 'rgb(102, 255, 72)';
+                  }
+                  else if(users>=10000){
+                    return 'rgb(72, 255, 255)';
+                  }
+                  else if(users>=5000){
+                    return 'rgb(89, 102, 255)';
+                  }
+                  else if(users>=2000){
+                    return 'rgb(255, 71, 36)';
+                  }
+                  return 'white';
+                }
+                return "";
+              },
+              backgroundColor: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  return 'rgba(255, 153, 153, 0.1)';
+                }
+                return "";
+              },
+              formatter: function(value, context){
+                if (context.dataIndex == context.dataset.data.length - 1){
+                  return context.dataset.label + ' 人氣 ' + value;
+                }
+                return "";
+              }
+            }
           },
           {
             label: csvData[0][8],
             data: b8,
             fill: false,
-            borderColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(255, 179, 179)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
             pointHitRadius: 20,
-            pointStyle: false
+            pointStyle: false,
+            datalabels:{
+              display: true,
+              anchor: 'end',
+              clamp: 'true',
+              align: '15',
+              offset: 1,
+              borderRadius: 4,
+              padding: 6,
+              font: {
+                weight: 'bold',
+                size: 11
+              },
+              color: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  var users = parseInt(value.dataset.data[value.dataIndex]);
+                  if(users>=100000){
+                    return 'rgb(214, 102, 255)';
+                  }
+                  else if(users>=60000){
+                    return 'rgb(255, 255, 102)';
+                  }
+                  else if(users>=30000){
+                    return 'rgb(102, 255, 72)';
+                  }
+                  else if(users>=10000){
+                    return 'rgb(72, 255, 255)';
+                  }
+                  else if(users>=5000){
+                    return 'rgb(89, 102, 255)';
+                  }
+                  else if(users>=2000){
+                    return 'rgb(255, 71, 36)';
+                  }
+                  return 'white';
+                }
+                return "";
+              },
+              backgroundColor: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  return 'rgba(255, 179, 179, 0.1)';
+                }
+                return "";
+              },
+              formatter: function(value, context){
+                if (context.dataIndex == context.dataset.data.length - 1){
+                  return context.dataset.label + ' 人氣 ' + value;
+                }
+                return "";
+              }
+            }
           },
           {
             label: csvData[0][9],
             data: b9,
             fill: false,
-            borderColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(255, 204, 204)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
             pointHitRadius: 20,
-            pointStyle: false
+            pointStyle: false,
+            datalabels:{
+              display: true,
+              anchor: 'end',
+              clamp: 'true',
+              align: '45',
+              offset: 0,
+              borderRadius: 4,
+              padding: 6,
+              font: {
+                weight: 'bold',
+                size: 11
+              },
+              color: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  var users = parseInt(value.dataset.data[value.dataIndex]);
+                  if(users>=100000){
+                    return 'rgb(214, 102, 255)';
+                  }
+                  else if(users>=60000){
+                    return 'rgb(255, 255, 102)';
+                  }
+                  else if(users>=30000){
+                    return 'rgb(102, 255, 72)';
+                  }
+                  else if(users>=10000){
+                    return 'rgb(72, 255, 255)';
+                  }
+                  else if(users>=5000){
+                    return 'rgb(89, 102, 255)';
+                  }
+                  else if(users>=2000){
+                    return 'rgb(255, 71, 36)';
+                  }
+                  return 'white';
+                }
+                return "";
+              },
+              backgroundColor: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  return 'rgba(255, 204, 204, 0.1)';
+                }
+                return "";
+              },
+              formatter: function(value, context){
+                if (context.dataIndex == context.dataset.data.length - 1){
+                  return context.dataset.label + ' 人氣 ' + value;
+                }
+                return "";
+              }
+            }
           },
           {
             label: csvData[0][10],
             data: b10,
             fill: false,
-            borderColor: 'rgb(255, 0, 0)',
+            borderColor: 'rgb(255, 230, 230)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
             pointHitRadius: 20,
-            pointStyle: false
+            pointStyle: false,
+            datalabels:{
+              display: true,
+              anchor: 'end',
+              clamp: 'true',
+              align: '50',
+              offset: 15,
+              borderRadius: 4,
+              padding: 6,
+              font: {
+                weight: 'bold',
+                size: 11
+              },
+              color: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  var users = parseInt(value.dataset.data[value.dataIndex]);
+                  if(users>=100000){
+                    return 'rgb(214, 102, 255)';
+                  }
+                  else if(users>=60000){
+                    return 'rgb(255, 255, 102)';
+                  }
+                  else if(users>=30000){
+                    return 'rgb(102, 255, 72)';
+                  }
+                  else if(users>=10000){
+                    return 'rgb(72, 255, 255)';
+                  }
+                  else if(users>=5000){
+                    return 'rgb(89, 102, 255)';
+                  }
+                  else if(users>=2000){
+                    return 'rgb(255, 71, 36)';
+                  }
+                  return 'white';
+                }
+                return "";
+              },
+              backgroundColor: function(value, context){
+                if (value.dataIndex == value.dataset.data.length - 1){
+                  return 'rgba(255, 230, 230, 0.1)';
+                }
+                return "";
+              },
+              formatter: function(value, context){
+                if (context.dataIndex == context.dataset.data.length - 1){
+                  return context.dataset.label + ' 人氣 ' + value;
+                }
+                return "";
+              }
+            }
           }
         ]
       };
@@ -220,9 +770,6 @@ var updateData = function(){
       chart.config.data = data;
       chart.config.options.scales.y1.min = csvData[csvData.length-1][10]-30;
       chart.update();
-    },
-    error: function(r){
-      alert('error');
     }
   })
 }
@@ -231,4 +778,11 @@ var updateInterval = setInterval(updateData, 1000);
 
 function Stop(){
   clearInterval(updateInterval);
+}
+
+function setTime(){
+  var now = new Date();
+  $('#current').html(now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate()+'<br>'
+                    +now.getHours()+':'+now.getMinutes()+':'+now.getSeconds());
+  setTimeout('setTime()',1000);
 }

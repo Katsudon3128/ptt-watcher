@@ -32,8 +32,9 @@ try:
                                                     ,data_list[len(data_list)-1][19]], restval=0, extrasaction='ignore')
         writer.writeheader()
 
+        # 取最新的前n筆資料寫入data
         for i in range(len(data_list)-200, len(data_list)):
-            writer.writerow({'LogTime':data_list[i][0][11:], data_list[i][1]:data_list[i][2]
+            writer.writerow({'LogTime':data_list[i][0], data_list[i][1]:data_list[i][2]
                                                     , data_list[i][3]:data_list[i][4]
                                                     , data_list[i][5]:data_list[i][6]
                                                     , data_list[i][7]:data_list[i][8]
