@@ -33,7 +33,7 @@ try:
         writer.writeheader()
 
         # 取最新的前n筆資料寫入data
-        for i in range(len(data_list)-200, len(data_list)):
+        for i in range(len(data_list)-3000, len(data_list)):
             writer.writerow({'LogTime':data_list[i][0], data_list[i][1]:data_list[i][2]
                                                     , data_list[i][3]:data_list[i][4]
                                                     , data_list[i][5]:data_list[i][6]

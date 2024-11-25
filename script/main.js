@@ -3,7 +3,7 @@ $(function(){
 });
 
 var ctx = document.getElementById('chart').getContext('2d');
-ctx.canvas.width = 1500;
+ctx.canvas.width = 1300;
 ctx.canvas.height = 1200;
 
 var chart = new Chart(ctx, {
@@ -27,14 +27,17 @@ var chart = new Chart(ctx, {
     plugins:{
       legend:{
         labels:{
-          color: 'white'
+          color: 'white',
+          font: {
+            size: 16
+          }
         }
       }
     },
     layout: {
         padding: {
             left: 20,
-            right: 200,
+            right: 250,
             top: 20,
             bottom: 20
         }
@@ -87,7 +90,7 @@ var chart = new Chart(ctx, {
               return 'rgb(0, 9, 102)';
             }
             else if(context.tick.value>=2000){
-              return 'rgb(102, 17, 0)';
+              return 'rgb(51, 0, 0)';
             }
             return 'rgb(51, 51, 51)';
           }
@@ -174,7 +177,7 @@ var updateData = function(){
               padding: 6,
               font: {
                 weight: 'bold',
-                size: 18
+                size: 22
               },
               color: function(value, context){
                 if (value.dataIndex == value.dataset.data.length - 1){
@@ -219,7 +222,7 @@ var updateData = function(){
             label: csvData[0][2],
             data: b2,
             fill: false,
-            borderColor: 'rgb(255, 26, 26)',
+            borderColor: 'rgb(255, 255, 0)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
@@ -235,7 +238,7 @@ var updateData = function(){
               padding: 6,
               font: {
                 weight: 'bold',
-                size: 17
+                size: 18
               },
               color: function(value, context){
                 if (value.dataIndex == value.dataset.data.length - 1){
@@ -280,7 +283,7 @@ var updateData = function(){
             label: csvData[0][3],
             data: b3,
             fill: false,
-            borderColor: 'rgb(255, 51, 51)',
+            borderColor: 'rgb(0, 255, 0)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
@@ -341,7 +344,7 @@ var updateData = function(){
             label: csvData[0][4],
             data: b4,
             fill: false,
-            borderColor: 'rgb(255, 77, 77)',
+            borderColor: 'rgb(0, 0, 255)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
@@ -351,7 +354,7 @@ var updateData = function(){
               display: true,
               anchor: 'end',
               clamp: 'true',
-              align: '-40',
+              align: '-46',
               offset: 5,
               borderRadius: 4,
               padding: 6,
@@ -402,7 +405,7 @@ var updateData = function(){
             label: csvData[0][5],
             data: b5,
             fill: false,
-            borderColor: 'rgb(255, 102, 102)',
+            borderColor: 'rgb(255, 128, 0)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
@@ -463,7 +466,7 @@ var updateData = function(){
             label: csvData[0][6],
             data: b6,
             fill: false,
-            borderColor: 'rgb(255, 128, 128)',
+            borderColor: 'rgb(0, 128, 255)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
@@ -524,7 +527,7 @@ var updateData = function(){
             label: csvData[0][7],
             data: b7,
             fill: false,
-            borderColor: 'rgb(255, 153, 153)',
+            borderColor: 'rgb(191, 255, 0)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
@@ -585,7 +588,7 @@ var updateData = function(){
             label: csvData[0][8],
             data: b8,
             fill: false,
-            borderColor: 'rgb(255, 179, 179)',
+            borderColor: 'rgb(191, 0, 255)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
@@ -646,7 +649,7 @@ var updateData = function(){
             label: csvData[0][9],
             data: b9,
             fill: false,
-            borderColor: 'rgb(255, 204, 204)',
+            borderColor: 'rgb(0, 255, 191)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
@@ -707,7 +710,7 @@ var updateData = function(){
             label: csvData[0][10],
             data: b10,
             fill: false,
-            borderColor: 'rgb(255, 230, 230)',
+            borderColor: 'rgb(255, 0, 191)',
             tension: 0.1,
             yAxisID: 'y1',
             pointBorderWidth: 5,
@@ -783,6 +786,6 @@ function Stop(){
 function setTime(){
   var now = new Date();
   $('#current').html(now.getFullYear()+'-'+(now.getMonth()+1)+'-'+now.getDate()+'<br>'
-                    +now.getHours()+':'+now.getMinutes()+':'+now.getSeconds());
+                    +now.toLocaleTimeString());
   setTimeout('setTime()',1000);
 }
