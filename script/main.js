@@ -4,7 +4,7 @@ $(function(){
 
 var ctx = document.getElementById('chart').getContext('2d');
 ctx.canvas.width = 1300;
-ctx.canvas.height = 1200;
+ctx.canvas.height = 1150;
 
 var chart = new Chart(ctx, {
   type: 'line',
