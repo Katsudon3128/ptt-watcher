@@ -3,8 +3,8 @@ $(function(){
 });
 
 var ctx = document.getElementById('chart').getContext('2d');
-ctx.canvas.width = 1300;
-ctx.canvas.height = 1150;
+ctx.canvas.width = 1100;
+ctx.canvas.height = 900;
 
 var chart = new Chart(ctx, {
   type: 'line',
@@ -90,7 +90,7 @@ var chart = new Chart(ctx, {
               return 'rgb(0, 9, 102)';
             }
             else if(context.tick.value>=2000){
-              return 'rgb(51, 0, 0)';
+              return 'rgb(96, 0, 0)';
             }
             return 'rgb(51, 51, 51)';
           }
